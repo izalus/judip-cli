@@ -1,5 +1,6 @@
 const { program } = require('commander');
 const { version } = require('../package.json');
+const { create } = require('./actions/create');
 
 (() => {
   // VERSION
@@ -12,9 +13,7 @@ const { version } = require('../package.json');
     .command('create <name>')
     .option('-d, --dir <string>', 'output directory/folder')
     .description('Creates a new project/notebook in the specified folder')
-    .action((name, { dir = '.' }) => {
-      console.log({ name, dir });
-    });
+    .action((name, { dir = '.' }) => create(name, dir));
 
   program
     .command('run')
