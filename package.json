@@ -1,0 +1,27 @@
+{
+  "name": "judip",
+  "version": "1.0.0",
+  "description": "short for (Just Use Docker In Programming) is a tool to dynamically run code written in any language using Docker",
+  "main": "index.js",
+  "bin": {
+    "judip": "bin/judip.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [],
+  "author": "AkhileshNS",
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "uuid": "^3.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkhileshNS/judip.git"
+  },
+  "homepage": "https://github.com/AkhileshNS/judip#readme"
+}
