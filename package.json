@@ -10,13 +10,13 @@
     "access": "public"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test"
   },
   "keywords": [],
   "author": "AkhileshNS",
   "license": "MIT",
   "dependencies": {
-    "esm": "^3.2.25",
+    "commander": "^5.1.0",
     "uuid": "^3.4.0"
   },
   "repository": {
