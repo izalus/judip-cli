@@ -1,5 +1,5 @@
 {
-  "name": "judip",
+  "name": "judip-cli",
   "version": "1.0.0",
   "description": "short for (Just Use Docker In Programming) is a tool to dynamically run code written in any language using Docker",
   "main": "index.js",
