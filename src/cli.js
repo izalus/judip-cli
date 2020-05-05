@@ -37,5 +37,25 @@ const { create } = require('./actions/create');
       console.log({ recipe, dontcache });
     });
 
+  program
+    .command('add <recipe>')
+    .requiredOption(
+      '-o, --outputs <json>',
+      'get the outputs to fill out the recipe template'
+    )
+    .option('-b, --build', 'build the recipe after adding it to the project')
+    .option('-r, --run', 'execute the recipe after adding it to the project')
+    .description('adds a recipe to the current project')
+    .action((recipe, { run, build, outputs }) => {
+      console.log({ recipe, run, build, outputs });
+    });
+
+  program
+    .command('get inputs <recipe>')
+    .description('gets the inputs of a recipe in html compatible json format')
+    .action((recipe) => {
+      console.log(recipe);
+    });
+
   program.parse(process.argv);
 })();
