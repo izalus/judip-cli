@@ -2,6 +2,7 @@ const { program } = require('commander');
 const { version } = require('../package.json');
 const { create } = require('./actions/create');
 const { pull } = require('./actions/pull');
+const { get } = require('./actions/get');
 
 (() => {
   // VERSION
@@ -46,11 +47,9 @@ const { pull } = require('./actions/pull');
     });
 
   program
-    .command('get inputs <recipe>')
+    .command('get <recipe>')
     .description('gets the inputs of a recipe in html compatible json format')
-    .action((recipe) => {
-      console.log(recipe);
-    });
+    .action((recipe) => get(recipe));
 
   program.parse(process.argv);
 })();
