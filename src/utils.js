@@ -5,7 +5,7 @@ const getAppDataPath = () =>
     : process.env.HOME + '/.local/share');
 
 const getRecipeName = (recipe) => {
-  const parts = recipe.split('/');
+  const parts = recipe.toLowerCase().split('/');
   return `${parts[2].split('.')[0]}__${parts[3]}__${parts[4]}`;
 };
 

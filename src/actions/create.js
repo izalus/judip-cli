@@ -21,6 +21,8 @@ exports.create = async (name, dir) => {
       JSON.stringify(project)
     );
     await mkdir(path.join(dir, 'judip_recipes'));
+
+    console.log(`Successfully created project \"${name}\" at path \"${dir}\"`);
   } catch (err) {
     console.log(err);
   }

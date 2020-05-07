@@ -1,31 +1,23 @@
 const util = require('util');
 const path = require('path');
 const fs = require('fs');
-const Git = require('nodegit');
+const child_process = require('child_process');
 const { getAppDataPath, getRecipeName } = require('../utils');
+const package = require('../../package.json');
 
 const mkdir = util.promisify(fs.mkdir);
+const exec = util.promisify(child_process.exec);
 
 exports.pull = async (recipe) => {
   try {
-    if (!fs.existsSync(path.join(getAppDataPath(), 'judip-cli'))) {
-      await mkdir(path.join(getAppDataPath(), 'judip-cli'));
+    if (!fs.existsSync(path.join(getAppDataPath(), package.name))) {
+      await mkdir(path.join(getAppDataPath(), package.name));
     }
 
-    if (
-      !fs.existsSync(
-        path.join(getAppDataPath(), 'judip-cli/' + getRecipeName(recipe))
-      )
-    ) {
-      await mkdir(
-        path.join(getAppDataPath(), 'judip-cli/' + getRecipeName(recipe))
-      );
-    }
-
-    await Git.Clone(
-      recipe,
-      path.join(getAppDataPath(), 'judip-cli/' + getRecipeName(recipe))
-    );
+    await exec(`git clone ${recipe} ${getRecipeName(recipe)}`, {
+      cwd: path.join(getAppDataPath(), package.name),
+    });
+    console.log(`Successfully pulled recipe from ${recipe}`);
   } catch (err) {
     console.log(err);
   }

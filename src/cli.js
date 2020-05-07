@@ -3,6 +3,7 @@ const { version } = require('../package.json');
 const { create } = require('./actions/create');
 const { pull } = require('./actions/pull');
 const { get } = require('./actions/get');
+const { sync } = require('./actions/sync');
 
 (() => {
   // VERSION
@@ -50,6 +51,11 @@ const { get } = require('./actions/get');
     .command('get <recipe>')
     .description('gets the inputs of a recipe in html compatible json format')
     .action((recipe) => get(recipe));
+
+  program
+    .command('sync')
+    .description('pulls changes to all recipes (if any are available)')
+    .action(() => sync());
 
   program.parse(process.argv);
 })();

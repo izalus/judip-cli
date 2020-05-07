@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
+const package = require('../../package.json');
 const {
   getAppDataPath,
   getRecipeName,
@@ -119,13 +120,14 @@ const getInputs = (inputs) => {
   return res;
 };
 
-exports.get = async (recipe) => {
+const get = async (recipe) => {
   try {
     console.log(recipe);
-    const recipeName = getRecipeName(recipe);
     const recipePath = path.join(
       getAppDataPath(),
-      'judip-cli/' + recipeName + '/recipe.json'
+      package.name,
+      getRecipeName(recipe),
+      'recipe.json'
     );
 
     const data = await readFile(recipePath, 'utf8');
@@ -139,4 +141,5 @@ exports.get = async (recipe) => {
 module.exports = {
   getInputs,
   getLongform,
+  get,
 };
