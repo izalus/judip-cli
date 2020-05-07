@@ -1,6 +1,5 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
-const util = require('util');
 const package = require('../../package.json');
 const {
   getAppDataPath,
@@ -10,8 +9,6 @@ const {
   isSelect,
   getInput,
 } = require('../utils');
-
-const readFile = util.promisify(fs.readFile);
 
 const getLongform = (inputs) => {
   const res = {};
@@ -130,7 +127,7 @@ const get = async (recipe) => {
       'recipe.json'
     );
 
-    const data = await readFile(recipePath, 'utf8');
+    const data = await fs.readFile(recipePath, 'utf8');
     const recipeData = JSON.parse(data);
     console.log(getInputs(getLongform(recipeData.inputs)));
   } catch (err) {

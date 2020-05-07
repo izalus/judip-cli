@@ -1,16 +1,15 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const util = require('util');
 const child_process = require('child_process');
 
 const { getAppDataPath } = require('../utils');
 
-const readdir = util.promisify(fs.readdir);
 const exec = util.promisify(child_process.exec);
 
 exports.sync = async () => {
   try {
-    const files = await readdir(path.join(getAppDataPath(), 'judip-cli'), {
+    const files = await fs.readdir(path.join(getAppDataPath(), 'judip-cli'), {
       withFileTypes: true,
     });
     const dirNames = files

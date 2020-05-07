@@ -6,10 +6,14 @@
 
 - [x] Complete Sync Action
 
-- [ ] Complete Add Action
+- [x] Complete Add Action
 
 - [ ] Complete Run Action
 
-- [ ] [OPTIONAL] Add List Action
+- [ ] [FUTURE] Add List Action
 
-- [ ] [OPTIONAL] Add Delete Action
+- [ ] [FUTURE] Add Purge Action (For removing recipes)
+
+- [ ] [FUTURE] Add Remove Action (For removing blocks)
+
+- [ ] [FUTURE] Add a feature to the Add Action works similar to "npm i"

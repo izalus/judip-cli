@@ -1,10 +1,7 @@
 const uuid = require('uuid/v4');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const util = require('util');
-
-const writeFile = util.promisify(fs.writeFile);
-const mkdir = util.promisify(fs.mkdir);
 
 exports.create = async (name, dir) => {
   try {
@@ -16,11 +13,11 @@ exports.create = async (name, dir) => {
       blocks: [],
     };
 
-    await writeFile(
-      path.join(dir, name + '.judip.json'),
-      JSON.stringify(project)
+    await fs.writeFile(
+      path.join(dir, 'judip.json'),
+      JSON.stringify(project, null, 2)
     );
-    await mkdir(path.join(dir, 'judip_recipes'));
+    await fs.mkdir(path.join(dir, 'judip_recipes'));
 
     console.log(`Successfully created project \"${name}\" at path \"${dir}\"`);
   } catch (err) {

@@ -4,6 +4,7 @@ const { create } = require('./actions/create');
 const { pull } = require('./actions/pull');
 const { get } = require('./actions/get');
 const { sync } = require('./actions/sync');
+const { add } = require('./actions/add');
 
 (() => {
   // VERSION
@@ -41,11 +42,8 @@ const { sync } = require('./actions/sync');
       'get the outputs to fill out the recipe template'
     )
     .option('-b, --build', 'build the recipe after adding it to the project')
-    .option('-r, --run', 'execute the recipe after adding it to the project')
     .description('adds a recipe to the current project')
-    .action((recipe, { run, build, outputs }) => {
-      console.log({ recipe, run, build, outputs });
-    });
+    .action((recipe, { build, outputs }) => add(recipe, build, outputs));
 
   program
     .command('get <recipe>')
