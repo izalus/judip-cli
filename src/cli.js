@@ -1,6 +1,7 @@
 const { program } = require('commander');
 const { version } = require('../package.json');
 const { create } = require('./actions/create');
+const { pull } = require('./actions/pull');
 
 (() => {
   // VERSION
@@ -28,14 +29,8 @@ const { create } = require('./actions/create');
 
   program
     .command('pull <recipe>')
-    .option(
-      '-dc, --dontcache',
-      'tells the cli to not pull any docker images and cache any builds'
-    )
     .description('pulls and caches a recipe from github/gitlab/bitbucket')
-    .action((recipe, { dontcache }) => {
-      console.log({ recipe, dontcache });
-    });
+    .action((recipe) => pull(recipe));
 
   program
     .command('add <recipe>')
