@@ -7,6 +7,7 @@ const {
 } = require('../src/utils');
 const { getInputs, getLongform } = require('../src/actions/get');
 const { options } = require('./inputs-template');
+const cp = require('child_process');
 
 // console.log(package);
 // console.log(getAppDataPath());
@@ -24,6 +25,12 @@ const { options } = require('./inputs-template');
 // console.log(isRadio({}));
 // console.log(isRadio({ 1: '2', label: 'hello' }));
 
-console.log(getLongform(options[0]));
-console.log(getInputs(getLongform(options[0])));
-console.log(getInputs(getLongform(options[1])));
+// console.log(getLongform(options[0]));
+// console.log(getInputs(getLongform(options[0])));
+// console.log(getInputs(getLongform(options[1])));
+
+cp.spawn('node', ['-e', 'console.log("hello world");']).on('close', function (
+  code
+) {
+  console.log('child exit code (spawn)', code);
+});

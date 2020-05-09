@@ -5,6 +5,9 @@ const { pull } = require('./actions/pull');
 const { get } = require('./actions/get');
 const { sync } = require('./actions/sync');
 const { add } = require('./actions/add');
+const { save } = require('./actions/save');
+const { run } = require('./actions/run');
+const { clean } = require('./actions/clean');
 
 (() => {
   // VERSION
@@ -20,15 +23,19 @@ const { add } = require('./actions/add');
     .action((name, { dir = '.' }) => create(name, dir));
 
   program
-    .command('run')
-    .option('-f, --file <path>', 'The name of the file to be run')
+    .command('save')
     .option('-b, --block <id>', 'The id of the codeblock to be run')
+    .description('Saves the content of the codeblocks into the recipe files')
+    .action(({ block }) => save(block));
+
+  program
+    .command('run')
+    .option('-b, --block <id>', 'The id of the codeblock to be run')
+    .option('-bg, --background', 'keep running the container in the background')
     .description(
       "Runs the code in a project or in one of the project's codeblocks"
     )
-    .action(({ file, block }) => {
-      console.log({ file, block });
-    });
+    .action(({ block, background }) => run(block, background));
 
   program
     .command('pull <recipe>')
@@ -54,6 +61,11 @@ const { add } = require('./actions/add');
     .command('sync')
     .description('pulls changes to all recipes (if any are available)')
     .action(() => sync());
+
+  program
+    .command('clean')
+    .description('removes any dangling containers')
+    .action(() => clean());
 
   program.parse(process.argv);
 })();

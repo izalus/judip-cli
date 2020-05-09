@@ -1,12 +1,9 @@
 const path = require('path');
 const fs = require('fs-extra');
 const child_process = require('child_process');
-const util = require('util');
 const hbs = require('handlebars');
 const { getRecipeName, getAppDataPath } = require('../utils');
 const package = require('../../package.json');
-
-const exec = util.promisify(child_process.exec);
 
 exports.add = async (recipeUrl, build, outputs) => {
   try {
@@ -44,6 +41,7 @@ exports.add = async (recipeUrl, build, outputs) => {
       id: project.blocks.length + 1,
       tabs: [],
       outputs: JSON.parse(outputs),
+      logs: '',
     };
 
     recipe.entry.forEach((name) => {
@@ -57,15 +55,43 @@ exports.add = async (recipeUrl, build, outputs) => {
           type: 'code',
           name,
           value: '',
-          logs: [],
         });
       }
     });
 
     project.blocks.push(codeblock);
-    await fs.writeFile('judip.json', JSON.stringify(project, null, 2));
+    await fs.writeJson('judip.json', project);
     console.log(
       `Successfully added recipe ${recipeUrl} in project ${project.name}`
+    );
+
+    if (recipe.execute) {
+      for (let i in recipe.execute) {
+        const template = hbs.compile(recipe.execute[i]);
+        recipe.execute[i] = template({ project, block: codeblock });
+      }
+    } else {
+      recipe.execute = [
+        `docker build -t ${blockname} .`,
+        `docker run --rm --name ${blockname} ${blockname}`,
+      ];
+    }
+
+    if (recipe.execute_background) {
+      for (let i in recipe.execute_background) {
+        const template = hbs.compile(recipe.execute_background[i]);
+        recipe.execute_background[i] = template({ project, block: codeblock });
+      }
+    } else {
+      recipe.execute_background = [
+        `docker build -t ${blockname} .`,
+        `docker run -d --name ${blockname} ${blockname}`,
+      ];
+    }
+
+    await fs.writeJson(
+      path.join('judip_recipes', blockname, 'recipe.json'),
+      recipe
     );
 
     if (build) {
