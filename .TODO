@@ -14,10 +14,10 @@
 
 - [x] Complete Clean Action
 
+- [x] Complete Remove Action
+
 - [ ] [FUTURE] Add List Action
 
 - [ ] [FUTURE] Add Purge Action (For removing recipes)
-
-- [ ] [FUTURE] Add Remove Action (For removing blocks)
 
 - [ ] [FUTURE] Add a feature to the Add Action works similar to "npm i"

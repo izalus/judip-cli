@@ -8,12 +8,11 @@ const { add } = require('./actions/add');
 const { save } = require('./actions/save');
 const { run } = require('./actions/run');
 const { clean } = require('./actions/clean');
+const { remove } = require('./actions/remove');
 
 (() => {
   // VERSION
   program.version(version, '-v, --version', 'output the current version');
-
-  // OPTIONS
 
   // COMMANDS
   program
@@ -51,6 +50,11 @@ const { clean } = require('./actions/clean');
     .option('-b, --build', 'build the recipe after adding it to the project')
     .description('adds a recipe to the current project')
     .action((recipe, { build, outputs }) => add(recipe, build, outputs));
+
+  program
+    .command('remove <blockId>')
+    .description('removes a block with the specified id')
+    .action((blockId) => remove(blockId));
 
   program
     .command('get <recipe>')
