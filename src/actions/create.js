@@ -10,6 +10,7 @@ exports.create = async (name, dir) => {
     const project = {
       name,
       id,
+      count: 0,
       blocks: [],
     };
 

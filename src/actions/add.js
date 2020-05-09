@@ -8,8 +8,9 @@ const package = require('../../package.json');
 exports.add = async (recipeUrl, build, outputs) => {
   try {
     const project = await fs.readJson('judip.json');
+    project.count = project.count + 1;
     const blockname = `${project.id}_${getRecipeName(recipeUrl)}_${
-      project.blocks.length + 1
+      project.count
     }`;
 
     await fs.copy(
@@ -38,7 +39,7 @@ exports.add = async (recipeUrl, build, outputs) => {
     const codeblock = {
       name: recipe.name || recipeUrl.split('__')[2],
       recipe: recipeUrl,
-      id: project.blocks.length + 1,
+      id: project.count,
       tabs: [],
       outputs: JSON.parse(outputs),
       logs: '',
