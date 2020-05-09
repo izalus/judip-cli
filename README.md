@@ -126,7 +126,3 @@ Hello World (From Python 3.0)
 Hello World (From NodeJS)
 Hello World (From Java)
 ```
-
-## License
-
-This library is licensed under the MIT License - check the [LICENSE](https://github.com/AkhileshNS/judip/blob/master/LICENSE) file for more details.
