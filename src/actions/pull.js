@@ -13,10 +13,18 @@ exports.pull = async (recipe) => {
       await fs.mkdir(path.join(getAppDataPath(), package.name));
     }
 
-    await exec(`git clone ${recipe} ${getRecipeName(recipe)}`, {
-      cwd: path.join(getAppDataPath(), package.name),
-    });
-    console.log(`Successfully pulled recipe from ${recipe}`);
+    if (
+      !fs.existsSync(
+        path.join(getAppDataPath(), package.name, getRecipeName(recipe))
+      )
+    ) {
+      await exec(`git clone ${recipe} ${getRecipeName(recipe)}`, {
+        cwd: path.join(getAppDataPath(), package.name),
+      });
+      console.log(`Successfully pulled recipe from ${recipe}`);
+    } else {
+      console.log(`${recipe} has already been pulled`);
+    }
   } catch (err) {
     console.log(err);
   }
