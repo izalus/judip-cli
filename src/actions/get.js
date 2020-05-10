@@ -129,7 +129,7 @@ const get = async (recipe) => {
 
     const data = await fs.readFile(recipePath, 'utf8');
     const recipeData = JSON.parse(data);
-    console.log(getInputs(getLongform(recipeData.inputs)));
+    console.log(JSON.stringify(getInputs(getLongform(recipeData.inputs))));
   } catch (err) {
     console.log(err);
   }
