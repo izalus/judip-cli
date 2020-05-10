@@ -119,7 +119,6 @@ const getInputs = (inputs) => {
 
 const get = async (recipe) => {
   try {
-    console.log(recipe);
     const recipePath = path.join(
       getAppDataPath(),
       package.name,
