@@ -15,9 +15,9 @@ exports.save = async (blockId) => {
         );
         for (let tab of block.tabs) {
           if (tab.type === 'code') {
-            await fs.writeFile(path.join(recipePath, tab.name), tab.value);
+            await fs.writeFile(path.join(recipePath, tab.path), tab.value);
             console.log(
-              `Successfully wrote new value to "${tab.name}" in ${project.name}`
+              `Successfully wrote new value to "${tab.path}" in ${project.name}`
             );
           }
         }

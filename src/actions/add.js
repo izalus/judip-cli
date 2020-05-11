@@ -45,8 +45,8 @@ exports.add = async (recipeUrl, build, outputs) => {
       logs: '',
     };
 
-    recipe.entry.forEach((name) => {
-      if (name === 'console') {
+    recipe.entry.forEach((path) => {
+      if (path === 'console') {
         codeblock.tabs.push({
           type: 'console',
           value: '',
@@ -54,7 +54,7 @@ exports.add = async (recipeUrl, build, outputs) => {
       } else {
         codeblock.tabs.push({
           type: 'code',
-          name,
+          path,
           value: '',
         });
       }
