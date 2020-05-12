@@ -1,4 +1,4 @@
-const uuid = require('uuid/v4');
+const uuid = require('uuid').v4;
 const fs = require('fs-extra');
 const path = require('path');
 
