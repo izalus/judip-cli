@@ -45,18 +45,21 @@ exports.add = async (recipeUrl, build, outputs) => {
       logs: '',
     };
 
-    for (let path of recipe.entry) {
-      if (path === 'console') {
+    for (let entryPath of recipe.entry) {
+      if (entryPath === 'console') {
         codeblock.tabs.push({
           type: 'console',
           value: '',
         });
       } else {
-        const value = await fs.readFile(path.join(blockname, path), 'utf8');
+        const value = await fs.readFile(
+          path.join('judip_recipes', blockname, entryPath),
+          'utf8'
+        );
 
         codeblock.tabs.push({
           type: 'code',
-          path,
+          path: entryPath,
           value,
         });
       }
