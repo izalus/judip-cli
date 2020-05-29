@@ -34,9 +34,7 @@ export const runBlock = async (
       });
 
       console.log(stdout);
-      if (parseInt(i) === commands.length - 1) {
-        logs += stdout;
-      }
+      logs += stdout;
     }
 
     project.blocks[index].logs = logs;
