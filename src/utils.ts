@@ -16,30 +16,18 @@ export const type = (element: any): string =>
     .slice(0, -1)
     .toLowerCase();
 
-export const isRadio = (el: any): boolean =>
-  (type(el) === 'array' && el.length === 2) ||
-  (type(el) === 'object' && Object.keys(el).length === 2);
-
-export const isSelect = (el: any): boolean =>
-  (type(el) === 'array' && el.length > 2) ||
-  (type(el) === 'object' &&
-    Object.keys(el).length > 2 &&
-    !('label' in el) &&
-    !('optional' in el) &&
-    !('options' in el) &&
-    !('value' in el));
-
-export const getInput = (
-  el: any
-): 'checkbox' | 'radio' | 'select' | 'input' | 'textarea' | null => {
-  if (type(el) === 'object' && [3, 4, 5].includes(Object.keys(el).length)) {
-    if (Object.keys(el).length === 3) {
-      return 'checkbox';
-    } else if (Object.keys(el).length === 5) {
-      return el.element;
-    } else {
-      return el.options.length === 2 ? 'radio' : 'select';
-    }
+export const getInput = (el: any) => {
+  if (el === 'boolean' || type(el) === 'boolean') {
+    return 'checkbox';
+  }
+  if (el === 'string' || type(el) === 'string') {
+    return 'input';
+  }
+  if (type(el) === 'array' && el.length === 2) {
+    return 'radio';
+  }
+  if (type(el) === 'array' && el.length > 2) {
+    return 'select';
   }
 
   return null;
