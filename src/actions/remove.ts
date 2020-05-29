@@ -22,7 +22,7 @@ export const remove = async (blockId: string) => {
         )
       );
       project.blocks.splice(index, 1);
-      await fs.writeJson('judip.json', project);
+      await fs.writeFile('judip.json', JSON.stringify(project));
       console.log(`Removed block ${blockId} from ${project.name}`);
     } else {
       console.log('Block with id ' + blockId + " doesn't exist");

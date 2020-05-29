@@ -71,7 +71,7 @@ export const add = async (
     }
 
     project.blocks.push(codeblock);
-    await fs.writeJson('judip.json', project);
+    await fs.writeFile('judip.json', JSON.stringify(project, null, 2));
     console.log(
       `Successfully added recipe ${recipeUrl} in project ${project.name}`
     );
@@ -100,9 +100,9 @@ export const add = async (
       ];
     }
 
-    await fs.writeJson(
+    await fs.writeFile(
       path.join('judip_recipes', blockname, 'recipe.json'),
-      recipe
+      JSON.stringify(recipe, null, 2)
     );
 
     if (build) {

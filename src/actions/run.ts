@@ -68,7 +68,7 @@ export const run = async (block: string, background: boolean) => {
         await runBlock(background, project, parseInt(index));
       }
     }
-    await fs.writeJson('judip.json', project);
+    await fs.writeFile('judip.json', JSON.stringify(project, null, 2));
   } catch (err) {
     console.log(err);
   }
