@@ -1,9 +1,9 @@
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
 
 const { getRecipeName } = require('../utils');
 
-exports.save = async (blockId) => {
+export const save = async (blockId: string) => {
   try {
     const project = await fs.readJson('judip.json');
 

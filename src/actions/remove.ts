@@ -1,12 +1,13 @@
-const fs = require('fs-extra');
-const path = require('path');
-const { getRecipeName } = require('../utils');
+import { IProject } from '../types';
+import fs from 'fs-extra';
+import path from 'path';
+import { getRecipeName } from '../utils';
 
-exports.remove = async (blockId) => {
+export const remove = async (blockId: string) => {
   try {
-    const project = await fs.readJson('judip.json');
+    const project: IProject = await fs.readJson('judip.json');
     let index = -1;
-    project.blocks.forEach(({ id }, i) => {
+    project.blocks.forEach(({ id }, i: number) => {
       if (blockId === id.toString()) {
         index = i;
       }

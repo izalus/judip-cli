@@ -1,22 +1,22 @@
-const path = require('path');
-const fs = require('fs-extra');
-const util = require('util');
-const child_process = require('child_process');
-
-const { getAppDataPath } = require('../utils');
+import path from 'path';
+import fs from 'fs';
+import util from 'util';
+import child_process from 'child_process';
+import { getAppDataPath } from '../utils';
 
 const exec = util.promisify(child_process.exec);
+const readdir = util.promisify(fs.readdir);
 
-exports.sync = async () => {
+export const sync = async () => {
   try {
-    const files = await fs.readdir(path.join(getAppDataPath(), 'judip-cli'), {
+    const files = await readdir(path.join(getAppDataPath(), 'judip-cli'), {
       withFileTypes: true,
     });
     const dirNames = files
       .filter((dir) => dir.isDirectory())
       .map((dir) => dir.name);
 
-    dirNames.forEach(async (name) => {
+    dirNames.forEach(async (name: string) => {
       try {
         const { stdout } = await exec('git pull', {
           cwd: path.join(getAppDataPath(), 'judip-cli', name),

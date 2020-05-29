@@ -9,8 +9,18 @@
   "publishConfig": {
     "access": "public"
   },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts"
+    }
+  },
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "build": "tsc -p .",
+    "start": "npm-watch build"
   },
   "keywords": [],
   "author": "izalus",
@@ -24,5 +34,12 @@
     "type": "git",
     "url": "git+https://github.com/izalus/judip.git"
   },
-  "homepage": "https://github.com/izalus/judip#readme"
+  "homepage": "https://github.com/izalus/judip#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.1",
+    "@types/node": "^14.0.5",
+    "@types/uuid": "^8.0.0",
+    "npm-watch": "^0.6.0",
+    "typescript": "^3.9.3"
+  }
 }

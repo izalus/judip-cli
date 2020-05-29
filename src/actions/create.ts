@@ -1,8 +1,8 @@
-const uuid = require('uuid').v4;
-const fs = require('fs-extra');
-const path = require('path');
+import { v4 as uuid } from 'uuid';
+import fs from 'fs-extra';
+import path from 'path';
 
-exports.create = async (name, dir) => {
+export const create = async (name: string, dir: string) => {
   try {
     if (fs.existsSync('judip.json')) {
       console.log('A project already exists in this folder');

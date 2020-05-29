@@ -1,9 +1,9 @@
-const child_process = require('child_process');
-const util = require('util');
+import child_process from 'child_process';
+import util from 'util';
 
 const exec = util.promisify(child_process.exec);
 
-exports.clean = async () => {
+export const clean = async () => {
   try {
     await exec('docker container prune -f');
     console.log('Cleaned any dangling containers');

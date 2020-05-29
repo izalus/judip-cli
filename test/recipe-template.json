@@ -1,0 +1,38 @@
+{
+  "name": "NodeJS",
+  "entry": ["index.js"],
+  "inputs": {
+    "custom_name": "string",
+    "version": {
+      "14": "14.2.0-stretch-slim",
+      "13": "13.14.0-stretch-slim",
+      "12": "12.16.3-stretch-slim",
+      "10": "10.20.1-stretch-slim"
+    },
+    "release": ["slim", "buster"],
+    "isSlim": "boolean"
+  },
+  "details": {
+    "custom_name": {
+      "element": "input",
+      "label": "Enter custom name",
+      "placeholder": "Ex: hello-world",
+      "optional": false
+    },
+    "version": {
+      "label": "Choose version",
+      "value": "12.16.3-stretch-slim",
+      "optional": false
+    },
+    "release": {
+      "label": "Choose release",
+      "value": "slim",
+      "optional": false
+    },
+    "isSlim": {
+      "label": "Use slim?",
+      "value": true,
+      "optional": false
+    }
+  }
+}

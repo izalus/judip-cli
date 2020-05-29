@@ -1,0 +1,45 @@
+{
+    "name": "judip-cli",
+    "version": "1.0.0",
+    "description": "short for (Just Use Docker In Programming) is a tool to dynamically run code written in any language using Docker",
+    "main": "index.js",
+    "bin": {
+        "judip": "bin/judip.js"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "watch": {
+        "build": {
+            "patterns": [
+                "src"
+            ],
+            "extensions": "ts"
+        }
+    },
+    "scripts": {
+        "test": "node test",
+        "build": "tsc -p .",
+        "start": "npm-watch build"
+    },
+    "keywords": [],
+    "author": "izalus",
+    "dependencies": {
+        "commander": "^5.1.0",
+        "fs-extra": "^9.0.0",
+        "handlebars": "^4.7.6",
+        "uuid": "^3.4.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/izalus/judip.git"
+    },
+    "homepage": "https://github.com/izalus/judip#readme",
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.1",
+        "@types/node": "^14.0.5",
+        "@types/uuid": "^8.0.0",
+        "npm-watch": "^0.6.0",
+        "typescript": "^3.9.3"
+    }
+}

@@ -1,11 +1,16 @@
-const path = require('path');
-const fs = require('fs-extra');
-const child_process = require('child_process');
-const hbs = require('handlebars');
-const { getRecipeName, getAppDataPath } = require('../utils');
-const package = require('../../package.json');
+import path from 'path';
+import fs from 'fs-extra';
+import child_process from 'child_process';
+import hbs from 'handlebars';
+import { getRecipeName, getAppDataPath } from '../utils';
+import Package from '../../package.json';
+import { ICodeBlock } from '../types';
 
-exports.add = async (recipeUrl, build, outputs) => {
+export const add = async (
+  recipeUrl: string,
+  build: boolean,
+  outputs: string
+) => {
   try {
     const project = await fs.readJson('judip.json');
     project.count = project.count + 1;
@@ -14,7 +19,7 @@ exports.add = async (recipeUrl, build, outputs) => {
     }`;
 
     await fs.copy(
-      path.join(getAppDataPath(), package.name, getRecipeName(recipeUrl)),
+      path.join(getAppDataPath(), Package.name, getRecipeName(recipeUrl)),
       path.join('judip_recipes', blockname)
     );
 
@@ -36,7 +41,7 @@ exports.add = async (recipeUrl, build, outputs) => {
       );
     }
 
-    const codeblock = {
+    const codeblock: ICodeBlock = {
       name: recipe.name || recipeUrl.split('__')[2],
       recipe: recipeUrl,
       id: project.count,

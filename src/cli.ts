@@ -1,14 +1,14 @@
-const { program } = require('commander');
-const { version } = require('../package.json');
-const { create } = require('./actions/create');
-const { pull } = require('./actions/pull');
-const { get } = require('./actions/get');
-const { sync } = require('./actions/sync');
-const { add } = require('./actions/add');
-const { save } = require('./actions/save');
-const { run } = require('./actions/run');
-const { clean } = require('./actions/clean');
-const { remove } = require('./actions/remove');
+import { program } from 'commander';
+import { version } from '../package.json';
+import { create } from './actions/create';
+import { pull } from './actions/pull';
+import { get } from './actions/get';
+import { sync } from './actions/sync';
+import { add } from './actions/add';
+import { save } from './actions/save';
+import { run } from './actions/run';
+import { clean } from './actions/clean';
+import { remove } from './actions/remove';
 
 (() => {
   // VERSION

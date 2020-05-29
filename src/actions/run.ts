@@ -1,14 +1,19 @@
-const fs = require('fs-extra');
-const path = require('path');
-const child_process = require('child_process');
-const util = require('util');
-const { getRecipeName } = require('../utils');
-const { save } = require('./save');
-const { clean } = require('./clean');
+import { IProject } from '../types';
+import fs from 'fs-extra';
+import path from 'path';
+import child_process from 'child_process';
+import util from 'util';
+import { getRecipeName } from '../utils';
+import { save } from './save';
+import { clean } from './clean';
 
 const exec = util.promisify(child_process.exec);
 
-const runBlock = async (background, project, index) => {
+export const runBlock = async (
+  background: boolean,
+  project: IProject,
+  index: number
+) => {
   try {
     const blockname = `${project.id}_${getRecipeName(
       project.blocks[index].recipe
@@ -29,7 +34,7 @@ const runBlock = async (background, project, index) => {
       });
 
       console.log(stdout);
-      if (i == commands.length - 1) {
+      if (parseInt(i) === commands.length - 1) {
         logs += stdout;
       }
     }
@@ -40,11 +45,11 @@ const runBlock = async (background, project, index) => {
   }
 };
 
-exports.run = async (block, background) => {
+export const run = async (block: string, background: boolean) => {
   try {
     await clean();
     await save(block);
-    const project = await fs.readJson('judip.json');
+    const project: IProject = await fs.readJson('judip.json');
     if (block) {
       let index = -1;
       project.blocks.forEach(({ id }, i) => {
@@ -60,7 +65,7 @@ exports.run = async (block, background) => {
       }
     } else {
       for (let index in project.blocks) {
-        await runBlock(background, project, index);
+        await runBlock(background, project, parseInt(index));
       }
     }
     await fs.writeJson('judip.json', project);
